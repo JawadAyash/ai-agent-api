@@ -2,6 +2,9 @@ from fastapi import FastAPI
 from app.api.routes.health import router as health_router
 from app.api.routes.agent import router as agent_router
 from app.core.config import settings
+from app.core.logging import setup_logger
+
+setup_logger()
 
 app = FastAPI(
     title=settings.APP_NAME,

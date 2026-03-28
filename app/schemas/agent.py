@@ -6,7 +6,12 @@ class AgentRequest(BaseModel):
 
 class AgentResponse(BaseModel):
     session_id: str
+    original_message: str
     category: str
     priority: str
+    confidence: float
+    ticket_summary: str
     agent_response: str
+    escalate: bool
+    department: str
     timestamp: str

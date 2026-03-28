@@ -20,6 +20,8 @@ def get_simple_agent_response(user_message: str) -> OpenAIResponseResult:
         return OpenAIResponseResult(
             category=parsed["category"],
             priority=parsed["priority"],
+            confidence=parsed["confidence"],
+            ticket_summary=parsed["ticket_summary"],
             response=parsed["response"]
         )
 
