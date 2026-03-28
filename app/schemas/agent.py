@@ -13,5 +13,6 @@ class AgentResponse(BaseModel):
     ticket_summary: str
     agent_response: str
     escalate: bool
+    outage_detected: bool
     department: str
     timestamp: str

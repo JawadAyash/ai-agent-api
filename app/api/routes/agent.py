@@ -15,7 +15,12 @@ def run_agent(payload: AgentRequest):
 
         result = run_support_agent(payload.message)
 
-        logger.info(f"Category: {result['category']}, Priority: {result['priority']}, Department: {result['department']}")
+        logger.info(
+            f"Category: {result['category']}, "
+            f"Priority: {result['priority']}, "
+            f"Department: {result['department']}, "
+            f"Outage Detected: {result['outage_detected']}"
+        )
 
         return AgentResponse(
             session_id=payload.session_id,
@@ -26,6 +31,7 @@ def run_agent(payload: AgentRequest):
             ticket_summary=result["ticket_summary"],
             agent_response=result["response"],
             escalate=result["escalate"],
+            outage_detected=result["outage_detected"],
             department=result["department"],
             timestamp=datetime.utcnow().isoformat()
         )
