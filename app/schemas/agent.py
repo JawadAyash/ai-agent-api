@@ -19,4 +19,6 @@ class AgentResponse(BaseModel):
     customer_id: Optional[str]
     customer_found: bool
     customer_info: Optional[Dict]
+    ticket_created: bool
+    ticket: Optional[Dict]
     timestamp: str

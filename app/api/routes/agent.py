@@ -33,21 +33,23 @@ def run_agent(payload: AgentRequest):
         })
 
         return AgentResponse(
-            session_id=payload.session_id,
-            original_message=payload.message,
-            category=result["category"],
-            priority=result["priority"],
-            confidence=result["confidence"],
-            ticket_summary=result["ticket_summary"],
-            agent_response=result["response"],
-            escalate=result["escalate"],
-            outage_detected=result["outage_detected"],
-            department=result["department"],
-            customer_id=result["customer_id"],
-            customer_found=result["customer_found"],
-            customer_info=result["customer_info"],
-            timestamp=datetime.utcnow().isoformat()
-        )
+    session_id=payload.session_id,
+    original_message=payload.message,
+    category=result["category"],
+    priority=result["priority"],
+    confidence=result["confidence"],
+    ticket_summary=result["ticket_summary"],
+    agent_response=result["response"],
+    escalate=result["escalate"],
+    outage_detected=result["outage_detected"],
+    department=result["department"],
+    customer_id=result["customer_id"],
+    customer_found=result["customer_found"],
+    customer_info=result["customer_info"],
+    ticket_created=result["ticket_created"],
+    ticket=result["ticket"],
+    timestamp=datetime.utcnow().isoformat()
+)
 
     except RuntimeError as e:
         logger.error({

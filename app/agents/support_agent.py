@@ -1,7 +1,9 @@
 from app.services.openai_service import get_simple_agent_response
 from app.tools.detection_tools import detect_outage_keywords
 from app.tools.customer_tools import extract_customer_id, get_customer_info
+from app.tools.action_tools import create_ticket
 from app.services.memory_service import add_to_memory
+
 
 def run_support_agent(user_message: str, session_id: str):
     result = get_simple_agent_response(user_message, session_id)
@@ -21,6 +23,7 @@ def run_support_agent(user_message: str, session_id: str):
 
     # Escalation logic
     escalate = False
+
     if result.priority == "High" or result.confidence < 0.6 or outage_detected:
         escalate = True
 
@@ -38,6 +41,19 @@ def run_support_agent(user_message: str, session_id: str):
 
     department = routing_map.get(result.category, "Customer Support")
 
+    # 🔥 ACTION TOOL EXECUTION
+    ticket_created = False
+    ticket = None
+
+    if escalate:
+        ticket = create_ticket(
+            category=result.category,
+            priority=result.priority,
+            summary=result.ticket_summary,
+            department=department
+        )
+        ticket_created = True
+
     # Save to memory
     add_to_memory(session_id, user_message, result.response)
 
@@ -52,5 +68,7 @@ def run_support_agent(user_message: str, session_id: str):
         "outage_detected": outage_detected,
         "customer_id": customer_id,
         "customer_found": customer_found,
-        "customer_info": customer_info
+        "customer_info": customer_info,
+        "ticket_created": ticket_created,
+        "ticket": ticket
     }
