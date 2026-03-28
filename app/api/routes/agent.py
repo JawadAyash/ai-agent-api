@@ -17,7 +17,7 @@ def run_agent(payload: AgentRequest):
             "message": payload.message
         })
 
-        result = run_support_agent(payload.message)
+        result = run_support_agent(payload.message, payload.session_id)
 
         logger.info({
             "event": "agent_decision",
