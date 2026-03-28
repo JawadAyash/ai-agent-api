@@ -1,11 +1,19 @@
 from app.services.openai_service import get_simple_agent_response
 from app.tools.detection_tools import detect_outage_keywords
+from app.tools.customer_tools import extract_customer_id, get_customer_info
 
 def run_support_agent(user_message: str):
     result = get_simple_agent_response(user_message)
 
-    # Tool-based detection
+    # Tool 1: outage detection
     outage_detected = detect_outage_keywords(user_message)
+
+    # Tool 2: customer lookup
+    customer_id = extract_customer_id(user_message)
+    customer_info = None
+
+    if customer_id:
+        customer_info = get_customer_info(customer_id)
 
     # Escalation logic
     escalate = False
@@ -31,5 +39,7 @@ def run_support_agent(user_message: str):
         "response": result.response,
         "escalate": escalate,
         "department": department,
-        "outage_detected": outage_detected
+        "outage_detected": outage_detected,
+        "customer_id": customer_id,
+        "customer_info": customer_info
     }

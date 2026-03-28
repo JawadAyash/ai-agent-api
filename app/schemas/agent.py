@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+from typing import Optional, Dict
 
 class AgentRequest(BaseModel):
     session_id: str = Field(..., min_length=1, max_length=100)
@@ -15,4 +16,6 @@ class AgentResponse(BaseModel):
     escalate: bool
     outage_detected: bool
     department: str
+    customer_id: Optional[str]
+    customer_info: Optional[Dict]
     timestamp: str
