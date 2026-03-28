@@ -13,3 +13,7 @@ def add_to_memory(session_id: str, message: str, response: str):
         "message": message,
         "response": response
     })
+
+def clear_memory(session_id: str):
+    if session_id in memory_store:
+        del memory_store[session_id]
