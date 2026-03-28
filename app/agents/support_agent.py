@@ -2,6 +2,7 @@ from app.services.openai_service import get_simple_agent_response
 from app.tools.detection_tools import detect_outage_keywords
 from app.tools.customer_tools import extract_customer_id, get_customer_info
 
+
 def run_support_agent(user_message: str):
     result = get_simple_agent_response(user_message)
 
@@ -20,7 +21,12 @@ def run_support_agent(user_message: str):
 
     # Escalation logic
     escalate = False
+
     if result.priority == "High" or result.confidence < 0.6 or outage_detected:
+        escalate = True
+
+    # New business rule
+    if result.category == "Billing Issue" and not customer_found:
         escalate = True
 
     # Routing logic
