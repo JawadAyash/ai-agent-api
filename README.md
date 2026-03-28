@@ -61,6 +61,15 @@ uvicorn app.main:app --reload
 
 ---
 
+## 🐳 Run with Docker
+
+### Build image
+
+```bash
+docker build -t ai-agent-api .
+Run container
+docker run -p 8000:8000 ai-agent-api
+
 ## 👨‍💻 Author
 
 Jawad Ayash
