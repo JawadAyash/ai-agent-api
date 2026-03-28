@@ -17,5 +17,6 @@ class AgentResponse(BaseModel):
     outage_detected: bool
     department: str
     customer_id: Optional[str]
+    customer_found: bool
     customer_info: Optional[Dict]
     timestamp: str

@@ -11,9 +11,12 @@ def run_support_agent(user_message: str):
     # Tool 2: customer lookup
     customer_id = extract_customer_id(user_message)
     customer_info = None
+    customer_found = False
 
     if customer_id:
         customer_info = get_customer_info(customer_id)
+        if customer_info:
+            customer_found = True
 
     # Escalation logic
     escalate = False
@@ -41,5 +44,6 @@ def run_support_agent(user_message: str):
         "department": department,
         "outage_detected": outage_detected,
         "customer_id": customer_id,
+        "customer_found": customer_found,
         "customer_info": customer_info
     }

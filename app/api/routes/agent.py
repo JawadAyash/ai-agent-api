@@ -34,6 +34,7 @@ def run_agent(payload: AgentRequest):
     outage_detected=result["outage_detected"],
     department=result["department"],
     customer_id=result["customer_id"],
+    customer_found=result["customer_found"],
     customer_info=result["customer_info"],
     timestamp=datetime.utcnow().isoformat()
 )
